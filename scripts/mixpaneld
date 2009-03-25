@@ -1,0 +1,66 @@
+#!/usr/local/bin/python
+
+# beanstalk tube to use; you shouldn't change this.
+TUBE = 'mixpanel'
+
+# URL to mixpanel API
+API_HOST = 'api.mixpanel.com'
+
+if __name__ == '__main__':
+    import optparse, daemon, beanstalkc, logging, urllib, cPickle, httplib
+
+    parser = optparse.OptionParser()
+    parser.add_option('-l', '--host',
+        dest = 'host',
+        default = '0.0.0.0',
+        help = 'The beanstalkd host (default: 0.0.0.0)'
+    )
+    parser.add_option('-p', '--port',
+        dest = 'port',
+        type = 'int',
+        default = 11300,
+        help = 'The beanstalkd port (default: 11300)'
+    )
+    parser.add_option('-f', '--logfile',
+        dest = 'logfile',
+        default = False,
+        help = 'Optional log file; no logging if omitted.'
+    )
+    parser.add_option('-d',
+        dest = 'daemon',
+        default = False,
+        help = 'Run in daemon mode (INTENDED USAGE!)'
+    )
+    opts, remainder = parser.parse_args()
+    if opts.logfile:
+        logger = logging.getLogger('daemon') # logging space for daemon scripts
+        handler = logging.FileHandler(opts.logfile, 'w')
+        formatter = logging.Formatter('%(asctime)-15s %(message)s')
+        handler.setFormatter(formatter)
+        logger.addHandler(handler)
+        logger.setLevel(logging.DEBUG)
+    else:
+        logger = None
+
+    if opts.daemon:
+        daemon.daemonize()
+
+    conn = beanstalkc.Connection(host=opts.host, port=opts.port)
+    conn.watch(TUBE)
+    conn.ignore('default') # We don't care about the default tube
+
+    while True:
+        job = conn.reserve()
+        data = cPickle.loads(job.body)
+        req = '?'.join(('/log/', urllib.urlencode(data)))
+        # Using httplib due to some strange bug in urllib that makes it return
+        # a bunk object
+        httpconn = httplib.HTTPConnection(API_HOST)
+        httpconn.request(method='HEAD', url=req)
+        resp = httpconn.getresponse()
+        httpconn.close()
+        job.delete()
+        if logger:
+            stuff = (req,str(resp.status))
+            logger.info(' '.join(stuff))
+        
