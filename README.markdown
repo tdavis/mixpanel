@@ -30,7 +30,7 @@ installation and setup possible. At console, execute:
 	sudo rpm -Uvh http://download.fedora.redhat.com/pub/epel/5/i386/epel-release-5-3.noarch.rpm
 	sudo yum install beanstalkd
 	beanstalkd -d
-    scripts/mixpaneld -d
+    mixpaneld -d
 
 You are now up and running; you may skip down to "Usage".
 
@@ -94,7 +94,7 @@ reason, you can do what we saw above in `Installation (short)` to get things
 running:
 
     beanstalkd -d
-    scripts/mixpaneld -d
+    mixpaneld -d
 
 Then, in code:
     
