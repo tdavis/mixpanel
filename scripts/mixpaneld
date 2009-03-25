@@ -28,6 +28,7 @@ if __name__ == '__main__':
     )
     parser.add_option('-d',
         dest = 'daemon',
+        action = 'store_true',
         default = False,
         help = 'Run in daemon mode (INTENDED USAGE!)'
     )
