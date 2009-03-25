@@ -69,13 +69,13 @@ Usage
 
 To queue a log call:
 
-	from mixpanel import MixPanelLogger
+	from mixpanel import MixpanelLogger
 	# Your mixpanel project code
 	pcode = '7fdec37db628e57465b98e235338049d'
     # Beanstalk connection info
     host = 'localhost'
     port = 11311
-	logger = MixPanelLogger(pcode, host, port)
+	logger = MixpanelLogger(pcode, host, port)
 	logger.log(
 		category = 'my_category',
 		action = 'my_action',
@@ -98,7 +98,7 @@ running:
 
 Then, in code:
     
-    logger = MixPanelLogger(pcode)
+    logger = MixpanelLogger(pcode)
 
 And you're ready for logging in 3 lines without having to specify any host or
 port information! The only downside is, this setup won't work cross-network.

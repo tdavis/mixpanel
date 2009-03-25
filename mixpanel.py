@@ -1,6 +1,6 @@
 import os, beanstalkc, cPickle
 
-class MixPanelLogger(object):
+class MixpanelLogger(object):
     """
     The mixpanel logger client which communicates with the beanstalkd server.
     """
