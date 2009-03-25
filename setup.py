@@ -14,20 +14,20 @@ setup (
     author = 'Tom Davis',
     author_email = 'tom@ticketstumbler.com',
     url = 'http://github.com/tdavis/mixpanel/tree/master',
-    #download_url = '',
+    download_url = 'http://cloud.github.com/downloads/tdavis/mixpanel/mixpanel-0.1.tar.gz',
     classifiers = [ 'Development Status :: 4 - Beta',
                     'License :: OSI Approved :: BSD License',
                     'Programming Language :: Python',
                     'Intended Audience :: Developers',
                     'Topic :: Software Development :: Libraries :: Python Modules',
                   ],
-    platforms = ('Any',),
-    keywords = ('mixpanel',),
+    platforms = ['Any',],
+    keywords = ['mixpanel',],
     packages = ['mixpanel',],
     package_dir = {'mixpanel': '.'},
     scripts = ['scripts/mixpaneld',],
     # beanstalkc: beanstalkd client library
     # daemon: script used to daemonize mixpaneld script
-    install_requires=['beanstalkc', 'daemon>=1.0.1'],
+    install_requires=['beanstalkc', 'daemon>=1.0.1']
 )
 
