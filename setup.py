@@ -3,7 +3,7 @@ import os
 
 setup (
     name = 'mixpanel',
-    version = '0.3',
+    version = '0.4',
     description = 'Small Python library to make calls to mixpanel\'s API. Requires beanstalkd server.',
     long_description = """
     This library includes a client and a server. The client is used to queue
@@ -14,7 +14,7 @@ setup (
     author = 'Tom Davis',
     author_email = 'binjured@gmail.com',
     url = 'http://github.com/tdavis/mixpanel/tree/master',
-    download_url = 'http://cloud.github.com/downloads/tdavis/mixpanel/mixpanel-0.3.tar.gz',
+    download_url = 'http://cloud.github.com/downloads/tdavis/mixpanel/mixpanel-0.4.tar.gz',
     classifiers = [ 'Development Status :: 4 - Beta',
                     'License :: OSI Approved :: BSD License',
                     'Programming Language :: Python',
@@ -24,7 +24,7 @@ setup (
     platforms = ['Any',],
     keywords = ['mixpanel',],
     packages = ['mixpanel',],
-    package_dir = {'mixpanel': '.'},
+    package_dir = {'': '.'},
     scripts = ['scripts/mixpaneld',],
     # beanstalkc: beanstalkd client library
     # daemon: script used to daemonize mixpaneld script
