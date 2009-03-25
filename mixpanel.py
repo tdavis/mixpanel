@@ -19,8 +19,8 @@ class MixPanelLogger(object):
             pcode = os.environ.get('MIXPANEL_PROJECT_CODE', None)
             if not pcode:
                 raise ValueError, 'You did not supply a project code or env var'
-        host = os.environ.get('MIXPANEL_HOST', None) or host
-        port = int(os.environ.get('MIXPANEL_PORT', None) or port)
+        host = os.environ.get('MIXPANEL_BEANSTALKD_HOST', None) or host
+        port = int(os.environ.get('MIXPANEL_BEANSTALKD_PORT', None) or port)
         self.conn = beanstalkc.Connection(host=host, port=port)
         self.conn.use(self.tube)
         self.pcode = pcode
